@@ -1,0 +1,39 @@
+[package]
+name = "kokoro-ja"
+version = "0.1.0"
+edition = "2021"
+description = "Kokoro-82M(ONNX)の日本語音声合成をRustだけで行うライブラリ+CLI。日本語の読み変換(G2P、misakiのcutletと同じ規則)・音素のトークン化・ONNX推論・無音トリムを備え、Pythonを使わない。"
+license = "Apache-2.0"
+repository = "https://github.com/aon-co-jp/rs-kokoro-ja"
+readme = "README.md"
+authors = ["石 塚 正 浩 (MASAHIRO ISHIZUKA)"]
+
+[dependencies]
+# 形態素解析+UniDic(misakiが使うMeCab+UniDicと同系の辞書)。辞書は実行ファイルに埋め込む。
+lindera = { version = "6.2", features = ["embed-unidic"] }
+unicode-normalization = "0.1"
+serde_json = "1"
+
+[features]
+default = []
+# ONNX推論(Kokoro本体)。ONNX Runtimeを使う。G2Pだけなら不要。
+engine = ["dep:ort", "dep:ndarray", "dep:zip"]
+
+[dependencies.ort]
+version = "2.0.0-rc.15"
+optional = true
+
+[dependencies.ndarray]
+version = "0.16"
+optional = true
+
+[[bin]]
+name = "kokoro-ja"
+path = "src/main.rs"
+required-features = ["engine"]
+
+[dependencies.zip]
+version = "2"
+optional = true
+default-features = false
+features = ["deflate"]

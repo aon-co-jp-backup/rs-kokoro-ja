@@ -1,0 +1,11 @@
+rs-kokoro-ja は次のオープンソースの成果を取り込んでいます / This project builds on:
+
+- misaki (https://github.com/hexgrad/misaki), Apache-2.0 — 日本語G2Pの規則・表(data/hepburn.tsv, data/ja_words.txt)。
+  misakiはpolm/cutlet(MIT, https://github.com/polm/cutlet)の移植を含む。num2kanaは
+  https://github.com/Greatdane/Convert-Numbers-to-Japanese 由来。
+- kokoro-onnx (https://github.com/thewh1teagle/kokoro-onnx), MIT — 推論の手順(トークン化・声の選択・分割・無音トリム)、
+  語彙(data/kokoro_config.json)。無音トリムはlibrosa(ISC)の `effects.trim` と同じ計算。
+- Kokoro-82M (https://huggingface.co/hexgrad/Kokoro-82M), Apache-2.0 — モデルの重み(このリポジトリには含めない。別途入手)。
+- Lindera (MIT) + UniDic — 形態素解析。ONNX Runtime (MIT) / ort (MIT or Apache-2.0) — 推論。
+
+Kokoroの学習データに関する注記(許諾のある音声と、大手TTSの合成音声を含む)はモデルカードを参照してください。

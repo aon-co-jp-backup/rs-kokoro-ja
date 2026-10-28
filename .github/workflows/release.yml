@@ -1,0 +1,28 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: kokoro-ja-linux-x86_64
+            bin: kokoro-ja
+          - os: windows-latest
+            name: kokoro-ja-windows-x86_64
+            bin: kokoro-ja.exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --features engine
+      - name: パッケージ
+        shell: bash
+        run: |
+          mkdir dist && cp target/release/${{ matrix.bin }} dist/ && cp README.md LICENSE NOTICE dist/
+          cd dist && 7z a ../${{ matrix.name }}.zip . >/dev/null 2>&1 || zip -r ../${{ matrix.name }}.zip .
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.name }}.zip
