@@ -8,7 +8,7 @@
 - **G2P**: [misaki](https://github.com/hexgrad/misaki)(cutlet 系)と同じ規則の移植。形態素解析だけ MeCab → [Lindera](https://github.com/lindera/lindera)(UniDic 埋め込み)。
   **Python 版の出力と、対照表 41 文で完全一致**(`tests/g2p_parity.rs`)。
 - **推論**: [ort](https://github.com/pykeio/ort)(ONNX Runtime)。int8 版(約 92MB)で CPU のみ。
-  実測: 4 コア(Ryzen 9 3950X)で 5.6 秒の音声を約 2.7 秒(RTF 約 0.5)。
+  実測: 4 スレッド・int8・CPU のみで、5.6 秒の音声を Ryzen 9 3950X で約 2.7 秒(RTF 0.49)、ConoHa VPS の Xeon(Ice Lake)4 コアで約 2.2 秒(RTF 0.39、2 スレッドなら 0.63)。
 - **声**: `voices-v1.0.bin`(npz)を直接読む。日本語は `jf_alpha`(女性、最高評価 C+)など 5 種([VOICES.md](https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md))。
 - 長い文は 510 トークン以内に自動分割し、句読点に応じた間をあけてつなぐ(kokoro-onnx と同じ)。
 
