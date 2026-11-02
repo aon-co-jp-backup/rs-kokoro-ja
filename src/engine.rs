@@ -92,7 +92,7 @@ impl Voices {
         let mut map = HashMap::new();
         for i in 0..zip.len() {
             let mut entry = zip.by_index(i).map_err(|e| e.to_string())?;
-            let name = entry.name().trim_end_matches(".npy").to_string();
+            let name = entry.name().map_err(|e| e.to_string())?.trim_end_matches(".npy").to_string();
             let mut buf = Vec::with_capacity(entry.size() as usize);
             entry.read_to_end(&mut buf).map_err(|e| e.to_string())?;
             let (shape, data) = parse_npy(&buf).map_err(|e| format!("{name}: {e}"))?;

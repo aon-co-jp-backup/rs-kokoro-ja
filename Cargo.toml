@@ -33,7 +33,7 @@ path = "src/main.rs"
 required-features = ["engine"]
 
 [dependencies.zip]
-version = "2"
+version = "9"
 optional = true
 default-features = false
 features = ["deflate"]
