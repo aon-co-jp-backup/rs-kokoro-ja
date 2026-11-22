@@ -10,7 +10,7 @@ authors = ["石 塚 正 浩 (MASAHIRO ISHIZUKA)"]
 
 [dependencies]
 # 形態素解析+UniDic(misakiが使うMeCab+UniDicと同系の辞書)。辞書は実行ファイルに埋め込む。
-lindera = { version = "6.2", features = ["embed-unidic"] }
+lindera = { version = "7.0", features = ["embed-unidic"] }
 unicode-normalization = "0.1"
 serde_json = "1"
 
