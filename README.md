@@ -1,3 +1,5 @@
+> Latest translations / 翻訳の最新版: [0-LATEST-TRANSLATIONS.md](0-LATEST-TRANSLATIONS.md)
+
 # rs-kokoro-ja
 
 **Kokoro-82M の日本語音声合成を、Rust だけで。** Python も espeak も OpenJTalk のバイナリも要りません。
